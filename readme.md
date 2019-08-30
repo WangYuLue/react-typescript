@@ -1,43 +1,43 @@
-### 创建 package.json
+### 1、创建 package.json
 
 ```
 yarn init -y
 ```
 
-### git 初始化
+### 2、git 初始化
 
 ```
 git init
 ```
 
-### 添加 .gitignore 文件
+### 3、添加 .gitignore 文件
 
 ```
 node_modules
 dist
 ```
 
-### 安装 webpack 相关依赖
+### 4、安装 webpack 相关依赖
 
 ```
 yarn add webpack webpack-cli webpack-dev-server -D
 yarn add html-webpack-plugin -D 
 ```
 
-### 安装 typescript 相关依赖
+### 5、安装 typescript 相关依赖
 
 ```
 yarn add typescript ts-loader -D
 ```
 
-### 安装 react 相关依赖
+### 6、安装 react 相关依赖
 
 ```
 yarn add react react-dom
 yarn add @types/react @types/react-dom -D
 ```
 
-### 编写 tsconfig.json
+### 7、编写 tsconfig.json
 
 ```json
 {
@@ -81,7 +81,7 @@ import Head from '@components/head';
 import Head from '@components/head/index';
 ```
 
-### 添加入口文件
+### 8、添加入口文件
 
 添加 `src/index.tsx`,
 
@@ -110,7 +110,7 @@ class App extends Component {
 export default App;
 ```
 
-### 添加模版 html
+### 9、添加模版 html
 
 添加 `index.html`,
 
@@ -127,7 +127,7 @@ export default App;
 </html>
 ```
 
-### 编写 webpack.config.js 文件
+### 10、编写 webpack.config.js 文件
 
 ```js
 const path = require('path');
@@ -166,7 +166,7 @@ module.exports = {
 }
 ```
 
-### 添加 package.json script 脚本
+### 11、添加 package.json script 脚本
 
 ``` json
 
