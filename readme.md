@@ -214,6 +214,51 @@ yarn add css-loader node-sass sass-loader style-loader -D
 
 ### 13、添加tslint
 
-### 14、添加热更新
+> 在 `feat/support-tslint` 分支中可以看到如下修改
 
-### 15、添加react路由
+#### 安装相关依赖
+
+```bash
+yarn add tslint -D
+
+# 全局安装
+yarn global add tslint
+```
+
+#### 生成配置文件 tslint.json
+
+```
+tslint --init
+```
+
+如下：
+
+```json
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {},
+    "rulesDirectory": []
+}
+```
+
+#### 安装vscode插件 TSLint
+
+#### package.json 中添加脚本
+
+```json
+{
+  "lint": "tslint -p tsconfig.json 'src/**/*.{ts,tsx}'",
+  "lint:fix": "tslint -p tsconfig.json 'src/**/*.{ts,tsx}' --fix"
+}
+
+```
+
+### 14、提交前代码检查
+
+### 15、添加热更新
+
+### 16、添加react路由
