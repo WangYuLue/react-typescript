@@ -249,6 +249,8 @@ tslint --init
 
 ### 14、Typescript 添加 eslint
 
+> 在 `feat/support-eslint` 分支中可以看到如下修改
+
 #### 安装相关依赖
 
 ```
@@ -310,6 +312,18 @@ ESLint 需要一个配置文件来决定对哪些规则进行检查，添加 .es
   "typescript.tsdk": "node_modules/typescript/lib"
 }
 ```
+
+#### 其他
+
+> 在 typescript 的 3.7 或以上版本中，支持了可选链写法
+
+```js
+const a = { num: 1 };
+const b = a?.num;
+console.log(b);
+```
+
+如果报错，尝试升级 vscode
 
 #### 参考文档
 
