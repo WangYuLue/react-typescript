@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import './index.scss'
+import './index.scss';
+
+// 支持可选链写法
+const a = { num: 1 };
+const b = a?.num;
+console.log(b);
+
 class App extends Component {
   render() {
     return (
