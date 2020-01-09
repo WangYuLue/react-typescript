@@ -21,7 +21,7 @@ dist
 
 ```
 yarn add webpack webpack-cli webpack-dev-server -D
-yarn add html-webpack-plugin -D 
+yarn add html-webpack-plugin -D
 ```
 
 ### 5、安装 typescript 相关依赖
@@ -53,9 +53,7 @@ yarn add @types/react @types/react-dom -D
     "allowJs": true,
     "baseUrl": "./",
     "paths": {
-      "@container/*": [
-        "src/container/*"
-      ]
+      "@container/*": ["src/container/*"]
     }
   }
 }
@@ -63,22 +61,22 @@ yarn add @types/react @types/react-dom -D
 
 `tsconfig.json` 一些属性作用：
 
-1、`allowSyntheticDefaultImports:true`: 
+1、`allowSyntheticDefaultImports:true`:
 
 ```js
 // 这样不会报错
-import React, { Component} from 'react';
+import React, { Component } from "react";
 // 要不然只能
-import * as React from 'react';
+import * as React from "react";
 ```
 
 2、`moduleResolution:"node"`:
 
 ```js
 //可以直接引用文件夹
-import Head from '@components/head';
+import Head from "@components/head";
 // 而不需要
-import Head from '@components/head/index';
+import Head from "@components/head/index";
 ```
 
 ### 8、添加入口文件
@@ -86,24 +84,21 @@ import Head from '@components/head/index';
 添加 `src/index.tsx`,
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '@container/App/index';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "@container/App/index";
 
-
-ReactDOM.render(<App/>,document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
 添加 `src/container/App/index.tsx`
 
 ```js
-import React, { Component} from 'react';
+import React, { Component } from "react";
 
 class App extends Component {
   render() {
-    return (
-      <div>Hello React!</div>
-    )
+    return <div>Hello React!</div>;
   }
 }
 
@@ -114,11 +109,11 @@ export default App;
 
 添加 `index.html`,
 
-``` html
+```html
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Webpack App</title>
   </head>
   <body>
@@ -130,21 +125,21 @@ export default App;
 ### 10、编写 webpack.config.js 文件
 
 ```js
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
-  entry: './src/index.tsx',
+  mode: "development",
+  entry: "./src/index.tsx",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist")
   },
   module: {
     rules: [
       {
-        test : /\.tsx?$/,
-        use : 'ts-loader',
+        test: /\.tsx?$/,
+        use: "ts-loader",
         exclude: /node_modules/
       }
     ]
@@ -153,37 +148,31 @@ module.exports = {
     port: 3000
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: [".tsx", ".ts", ".js"],
     alias: {
-      "@container": path.resolve(__dirname, 'src/container/')
+      "@container": path.resolve(__dirname, "src/container/")
     }
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template : './index.html'
+      template: "./index.html"
     })
   ]
-}
+};
 ```
 
 ### 11、添加 package.json script 脚本
 
-``` json
-
+```json
 {
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "start": "webpack-dev-server --config webpack.config.js"
-  },
+  }
 }
-
 ```
 
----
-
-后续可选
-
-### 12、添加scss
+### 12、添加 scss
 
 安装相关依赖：
 
@@ -209,10 +198,14 @@ yarn add css-loader node-sass sass-loader style-loader -D
   ]
 }
 ```
- 
+
 然后就可以在 `src/container/App/index.tsx` 中添加 `.scss文件`
 
-### 13、添加tslint
+---
+
+后续可选
+
+### 13、添加 tslint (官方不推荐使用 tslint)
 
 > 在 `feat/support-tslint` 分支中可以看到如下修改
 
@@ -235,17 +228,15 @@ tslint --init
 
 ```json
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
-    ],
-    "jsRules": {},
-    "rules": {},
-    "rulesDirectory": []
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {},
+  "rulesDirectory": []
 }
 ```
 
-#### 安装vscode插件 TSLint
+#### 安装 vscode 插件 TSLint
 
 #### package.json 中添加脚本
 
@@ -254,11 +245,81 @@ tslint --init
   "lint": "tslint -p tsconfig.json 'src/**/*.{ts,tsx}'",
   "lint:fix": "tslint -p tsconfig.json 'src/**/*.{ts,tsx}' --fix"
 }
-
 ```
 
-### 14、提交前代码检查
+### 14、Typescript 添加 eslint
 
-### 15、添加热更新
+#### 安装相关依赖
 
-### 16、添加react路由
+```
+yarn add eslint -D
+```
+
+由于 ESLint 默认使用 `Espree` 进行语法解析，无法识别 TypeScript 的一些语法，故我们需要安装 `@typescript-eslint/parser`，替代掉默认的解析器：
+
+```
+yarn add @typescript-eslint/parser -D
+```
+
+接下来需要安装对应的插件 `@typescript-eslint/eslint-plugin` 它作为 eslint 默认规则的补充，提供了一些额外的适用于 ts 语法的规则。
+
+```
+yarn add @typescript-eslint/eslint-plugin -D
+```
+
+#### 添加配置文件
+
+ESLint 需要一个配置文件来决定对哪些规则进行检查，添加 .eslintrc
+
+```json
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-var": "error",
+    "semi": "error",
+    "@typescript-eslint/consistent-type-definitions": ["error", "interface"]
+  }
+}
+```
+
+#### 代码中 ESLint 检查，并自动保存
+
+##### 安装 vscode 插件 TSLint
+
+在项目更目录下创建一个配置文件 `.vscode/settings.json`，添加以下配置：
+
+```json
+{
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": true
+    }
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
+```
+
+#### 参考文档
+
+[TypeScript 入门教程 代码检查](https://ts.xcatliu.com/engineering/lint)
+[Using ESLint and Prettier in a TypeScript Project](https://www.robertcooper.me/using-eslint-and-prettier-in-a-typescript-project)
+
+### 15、提交前代码检查
+
+### 16、添加热更新
+
+### 17、添加 react 路由
+
+### 18、添加 sentry 监控工具
