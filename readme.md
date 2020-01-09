@@ -313,9 +313,11 @@ ESLint 需要一个配置文件来决定对哪些规则进行检查，添加 .es
 }
 ```
 
+> 在 vscode 1.41 版本以后，如果只需要代码检查，不需要添加`.vscode/settings.json`；
+
 #### 其他
 
-> 在 typescript 的 3.7 或以上版本中，支持了可选链写法
+在 typescript 的 3.7 或以上版本中，支持了可选链写法
 
 ```js
 const a = { num: 1 };
