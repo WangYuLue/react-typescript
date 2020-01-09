@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import './index.scss'
+import React, { Component } from "react";
+import "./index.scss";
 class App extends Component {
-  render() {
+  public render() {
     return (
       <div>Hello React!</div>
-    )
+    );
   }
 }
 
