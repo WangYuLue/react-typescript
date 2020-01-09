@@ -178,3 +178,42 @@ module.exports = {
 }
 
 ```
+
+---
+
+后续可选
+
+### 12、添加scss
+
+安装相关依赖：
+
+```
+yarn add css-loader node-sass sass-loader style-loader -D
+```
+
+在 `webpack.config.js` 中的 `module.rule` 里添加如下配置：
+
+```js
+{
+  test: /\.scss$/,
+  use: [
+    {
+      loader: "style-loader" // 将 JS 字符串生成为 style 节点
+    },
+    {
+      loader: "css-loader" // 将 CSS 转化成 CommonJS 模块
+    },
+    {
+      loader: "sass-loader" // 将 Sass 编译成 CSS
+    }
+  ]
+}
+```
+ 
+然后就可以在 `src/container/App/index.tsx` 中添加 `.scss文件`
+
+### 13、添加tslint
+
+### 14、添加热更新
+
+### 15、添加react路由
