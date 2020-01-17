@@ -6,8 +6,12 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "start": "webpack-dev-server --config webpack.config.js",
-    "eslint": "eslint 'src/**/*.{tsx,ts}'",
-    "precommit": "yarn eslint"
+    "eslint": "eslint 'src/**/*.{tsx,ts}'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn eslint"
+    }
   },
   "devDependencies": {
     "@types/react": "^16.9.2",
