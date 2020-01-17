@@ -334,6 +334,24 @@ console.log(b);
 
 ### 15、提交前代码检查
 
+> 基于 `feat/support-eslint` 创建分支 `feat/support-husky`
+
+安装 husky 依赖：
+
+```bash
+yarn add husky -D
+```
+
+在 package.json 中添加如下配置:
+
+```json
+"husky": {
+  "hooks": {
+    "pre-commit": "yarn eslint"
+  }
+}
+```
+
 ### 16、添加热更新
 
 ### 17、添加 react 路由
