@@ -6,6 +6,8 @@ const a = { num: 1 };
 const b = a?.num;
 console.log(b);
 
+// test husky lint
+
 class App extends Component {
   render() {
     return (
