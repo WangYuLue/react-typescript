@@ -334,6 +334,8 @@ console.log(b);
 
 ### 15、提交前代码检查
 
+#### 添加 lint
+
 > 基于 `feat/support-eslint` 创建分支 `feat/support-husky`
 
 安装 husky 依赖：
@@ -351,6 +353,29 @@ yarn add husky -D
   }
 }
 ```
+
+#### 添加 lint-staged
+
+安装 lint-staged 依赖：
+
+```bash
+yarn add lint-staged -D
+```
+
+在 package.json 中修改配置如下:
+
+```json
+"husky": {
+  "hooks": {
+    "pre-commit": "lint-staged"
+  }
+},
+"lint-staged": {
+  "src/**/*.{tsx,ts}": "eslint"
+}
+```
+
+将该分支合到 master
 
 ### 16、添加热更新
 
