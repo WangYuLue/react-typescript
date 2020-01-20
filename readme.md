@@ -379,6 +379,75 @@ yarn add lint-staged -D
 
 ### 16、添加热更新
 
+> 如果是 .js 文件，webpack 能良好的支持热更新；但是如果是 .ts 文件，由于 ts-loader 官方不支持 HMR，所以要做额外的处理，参考这个[链接](https://stackoverflow.com/questions/59818608/when-i-import-ts-suffix-files-webpack-hmr-not-work/59818711)
+
+#### 安装相关依赖
+
+```
+yarn add fork-ts-checker-webpack-plugin -D
+```
+
+#### webpack.config.js 修改
+
+修改 `ts-loader` 配置：
+
+```js
+{
+  test: /\.tsx?$/,
+  use: [
+    {
+      loader: 'ts-loader',
+      options: {
+        transpileOnly: true
+      }
+    }
+  ],
+  exclude: /node_modules/
+}
+```
+
+修改 `devServer`:
+
+```js
+devServer: {
+  port: 3000,
+  hot: true
+}
+```
+
+添加插件：
+
+```js
+new ForkTsCheckerWebpackPlugin();
+```
+
+#### package.json 修改
+
+将 `module` 从 `es6` 改成 `esnext`
+
+#### 安装必要的 typescript 申明文件
+
+```
+yarn add @types/eslint -D
+yarn add @types/webpack -D
+```
+
+#### index.tsx 添加如下代码
+
+```js
+if (typeof (module as any).hot !== 'undefined') {
+  (module as any).hot.accept('@container/App/index', () => {
+    console.log('Accepting the updated module!');
+    ReactDOM.render(<App />, document.getElementById('root'));
+  });
+}
+```
+
+#### 参考文档
+
+[模块热替换 文档](https://webpack.docschina.org/guides/hot-module-replacement/)
+https://webpack.js.org/guides/hot-module-replacement/
+
 ### 17、添加 react 路由
 
 ### 18、添加 sentry 监控工具

@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -12,27 +13,35 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true
+            }
+          }
+        ],
         exclude: /node_modules/
       },
       {
         test: /\.scss$/,
         use: [
           {
-            loader: "style-loader" // 将 JS 字符串生成为 style 节点
+            loader: "style-loader"
           },
           {
-            loader: "css-loader" // 将 CSS 转化成 CommonJS 模块
+            loader: "css-loader"
           },
           {
-            loader: "sass-loader" // 将 Sass 编译成 CSS
+            loader: "sass-loader"
           }
         ]
       }
     ]
   },
   devServer: {
-    port: 3000
+    port: 3000,
+    hot: true
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -43,6 +52,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html'
-    })
+    }),
+    new ForkTsCheckerWebpackPlugin()
   ]
-}
+};
