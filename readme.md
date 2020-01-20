@@ -451,3 +451,7 @@ https://webpack.js.org/guides/hot-module-replacement/
 ### 17、添加 react 路由
 
 ### 18、添加 sentry 监控工具
+
+### 19、添加单元测试
+
+### 20、添加 Dockerfile
