@@ -452,6 +452,8 @@ https://webpack.js.org/guides/hot-module-replacement/
 
 ### 添加 react 路由
 
+### 添加 mobx
+
 ### 填加调试
 
 ### 添加单元测试
@@ -461,5 +463,7 @@ https://webpack.js.org/guides/hot-module-replacement/
 ### 添加 Dockerfile
 
 ### 添加 sentry 监控工具
+
+### 添加 CI
 
 ### 部署到云服务器
